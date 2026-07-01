@@ -10,9 +10,6 @@ import net.sf.jsqlparser.expression.LongValue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * MyBatis-Plus 配置
- */
 @Configuration
 public class MybatisPlusConfig {
 
@@ -20,7 +17,6 @@ public class MybatisPlusConfig {
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
 
-        // 多租户拦截器
         TenantLineInnerInterceptor tenantInterceptor = new TenantLineInnerInterceptor();
         tenantInterceptor.setTenantLineHandler(new com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler() {
             @Override
@@ -31,12 +27,16 @@ public class MybatisPlusConfig {
             @Override
             public boolean ignoreTable(String tableName) {
                 return TenantContextHolder.isIgnoreTenant()
-                        || tableName.startsWith("sys_");
+                        || tableName.equals("t_sys_user")
+                        || tableName.equals("t_sys_role")
+                        || tableName.equals("t_sys_permission")
+                        || tableName.equals("t_sys_user_role")
+                        || tableName.equals("t_sys_role_permission")
+                        || tableName.equals("t_tenant");
             }
         });
         interceptor.addInnerInterceptor(tenantInterceptor);
 
-        // 分页插件
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
 
         return interceptor;

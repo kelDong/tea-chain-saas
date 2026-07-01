@@ -56,6 +56,8 @@
         <velocity.version>2.3</velocity.version>
         <springdoc.version>2.8.3</springdoc.version>
         <knife4j.version>4.5.0</knife4j.version>
+        <rabbitmq.version>3.1.2</rabbitmq.version>
+        <minio.version>8.5.9</minio.version>
     </properties>
 
     <dependencyManagement>
@@ -118,7 +120,12 @@
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>wx-java-miniapp-spring-boot-starter</artifactId>
-                <version>4.6.0</version>
+                <version>4.7.8-20251128.100947</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-pay</artifactId>
+                <version>4.7.8-20251128.100947</version>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
@@ -129,6 +136,16 @@
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+                <version>${rabbitmq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

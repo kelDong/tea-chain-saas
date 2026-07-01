@@ -3,10 +3,12 @@ package com.teachain.config;
 import com.teachain.common.filter.JwtAuthenticationFilter;
 import com.teachain.common.tenant.TenantInterceptor;
 import com.teachain.common.utils.JwtUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig implements WebMvcConfigurer {
 
@@ -34,8 +37,8 @@ public class SecurityConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter(JwtUtils jwtUtils, StringRedisTemplate redisTemplate) {
-        return new JwtAuthenticationFilter(jwtUtils, redisTemplate);
+    public JwtAuthenticationFilter jwtAuthenticationFilter(JwtUtils jwtUtils, StringRedisTemplate redisTemplate, ObjectMapper objectMapper) {
+        return new JwtAuthenticationFilter(jwtUtils, redisTemplate, objectMapper);
     }
 
     @Bean

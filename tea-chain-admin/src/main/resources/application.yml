@@ -71,3 +71,15 @@ wx:
   miniapp:
     appid: your_app_id
     secret: your_app_secret
+  pay:
+    app-id: your_pay_app_id
+    mch-id: your_mch_id
+    mch-key: your_mch_key
+    cert-path: classpath:apiclient_cert.p12
+    notify-url: http://your-domain/api/applet/pay/notify
+
+minio:
+  endpoint: http://localhost:9000
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket-name: tea-chain
